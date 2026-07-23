@@ -1,0 +1,52 @@
+module alu_tb;
+
+reg [7:0] A;
+reg [7:0] B;
+reg [3:0] sel;
+reg en;
+
+wire [7:0] Result;
+wire Carry;
+wire Zero;
+wire Overflow;
+
+alu uut (
+    .A(A),
+    .B(B),
+    .sel(sel),
+    .en(en),
+    .Result(Result),
+    .Carry(Carry),
+    .Zero(Zero),
+    .Overflow(Overflow)
+);
+
+initial begin
+
+    en = 1;
+
+    A = 8'd12;
+    B = 8'd5;
+
+    sel = 4'b0000; #10;   // Add
+    sel = 4'b0001; #10;   // Sub
+    sel = 4'b0010; #10;   // AND
+    sel = 4'b0011; #10;   // OR
+    sel = 4'b0100; #10;   // XOR
+    sel = 4'b0101; #10;   // NOT
+    sel = 4'b0110; #10;   // Left Shift
+    sel = 4'b0111; #10;   // Right Shift
+    sel = 4'b1000; #10;   // Increment
+    sel = 4'b1001; #10;   // Decrement
+    sel = 4'b1010; #10;   // NAND
+    sel = 4'b1011; #10;   // NOR
+    sel = 4'b1100; #10;   // XNOR
+    sel = 4'b1101; #10;   // Rotate Left
+    sel = 4'b1110; #10;   // Rotate Right
+    sel = 4'b1111; #10;   // Clear
+
+    en = 0; #10;
+
+    $finish;
+
+end
